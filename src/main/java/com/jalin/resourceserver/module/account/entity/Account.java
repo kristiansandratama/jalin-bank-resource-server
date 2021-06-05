@@ -34,4 +34,9 @@ public class Account {
     private Date createdDate;
     @UpdateTimestamp
     private Date modifiedDate;
+
+    public Account(String currency, BigDecimal balance) {
+        this.currency = currency;
+        this.balance = balance;
+    }
 }
