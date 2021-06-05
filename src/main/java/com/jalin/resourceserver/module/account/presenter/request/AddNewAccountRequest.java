@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
@@ -12,6 +14,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class AddNewAccountRequest {
+    @NotBlank
     private String currency;
+    @Positive
     private BigDecimal balance;
 }

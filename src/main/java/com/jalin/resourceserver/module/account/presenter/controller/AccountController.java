@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/banking/v1")
 public class AccountController {
@@ -19,7 +21,7 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/accounts")
-    public ResponseEntity<Object> addNewAccount(@RequestBody AddNewAccountRequest requestBody) {
+    public ResponseEntity<Object> addNewAccount(@Valid @RequestBody AddNewAccountRequest requestBody) {
         accountService.addNewAccount(new Account(requestBody.getCurrency(), requestBody.getBalance()));
         return new ResponseEntity<>(
                 new AddNewAccountResponse(true, "New banking account successfully added"),
