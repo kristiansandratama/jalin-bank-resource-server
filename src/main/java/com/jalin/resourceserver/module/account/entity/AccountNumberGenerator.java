@@ -1,4 +1,4 @@
-package com.jalin.resourceserver.module.account.entity.model;
+package com.jalin.resourceserver.module.account.entity;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

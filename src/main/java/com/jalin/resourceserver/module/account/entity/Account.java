@@ -25,7 +25,7 @@ public class Account {
     @Id
     @GenericGenerator(
             name = "accountNumber",
-            strategy = "com.jalin.resourceserver.module.account.entity.model.AccountNumberGenerator")
+            strategy = "com.jalin.resourceserver.module.account.entity.AccountNumberGenerator")
     @GeneratedValue(generator = "accountNumber")
     private String accountNumber;
     private String currency;

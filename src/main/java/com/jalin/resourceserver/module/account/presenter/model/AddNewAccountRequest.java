@@ -1,4 +1,4 @@
-package com.jalin.resourceserver.module.account.presenter.request;
+package com.jalin.resourceserver.module.account.presenter.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

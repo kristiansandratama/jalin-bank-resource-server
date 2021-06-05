@@ -1,4 +1,4 @@
-package com.jalin.resourceserver.module.account.presenter.response;
+package com.jalin.resourceserver.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AddNewAccountResponse {
+public class SuccessResponse {
     private Boolean success;
     private String message;
 }
