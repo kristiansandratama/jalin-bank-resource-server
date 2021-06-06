@@ -8,12 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
@@ -25,11 +23,19 @@ public class Account {
     @Id
     @GenericGenerator(
             name = "accountNumber",
-            strategy = "com.jalin.resourceserver.module.account.entity.AccountNumberGenerator")
+            strategy = "com.jalin.resourceserver.module.account.entity.IdGenerator")
     @GeneratedValue(generator = "accountNumber")
     private String accountNumber;
     private String currency;
     private BigDecimal balance;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "account",
+            orphanRemoval = true)
+    private Set<Transaction> transactions;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
     @CreationTimestamp
     private Date createdDate;
     @UpdateTimestamp
@@ -38,5 +44,11 @@ public class Account {
     public Account(String currency, BigDecimal balance) {
         this.currency = currency;
         this.balance = balance;
+    }
+
+    public Account(String currency, BigDecimal balance, Customer customer) {
+        this.currency = currency;
+        this.balance = balance;
+        this.customer = customer;
     }
 }
