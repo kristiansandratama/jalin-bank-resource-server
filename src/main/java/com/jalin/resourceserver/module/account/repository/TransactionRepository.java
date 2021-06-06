@@ -11,5 +11,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
     @Query("SELECT t FROM Transaction t WHERE t.account = :account " +
             "AND t.transactionDate = :transactionDate " +
             "ORDER BY t.createdDate ASC")
-    List<Transaction> findByAccountAndTransactionDate(String transactionDate, Account account);
+    List<Transaction> findByAccountAndTransactionDate(Account account, String transactionDate);
 }
