@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto findByMobileNumber(String mobileNumber) {
+    public CustomerDto findCustomerByMobileNumber(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with mobile number %s not found", mobileNumber)));

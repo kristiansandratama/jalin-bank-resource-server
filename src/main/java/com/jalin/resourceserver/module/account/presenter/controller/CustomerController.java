@@ -29,7 +29,7 @@ public class CustomerController {
 
     @GetMapping("/customers/find")
     public ResponseEntity<Object> findCustomerByMobileNumber(@RequestParam String mobileNumber) {
-        CustomerDto customer = customerService.findByMobileNumber(mobileNumber);
+        CustomerDto customer = customerService.findCustomerByMobileNumber(mobileNumber);
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Customer successfully found", customer),
                 HttpStatus.OK);
