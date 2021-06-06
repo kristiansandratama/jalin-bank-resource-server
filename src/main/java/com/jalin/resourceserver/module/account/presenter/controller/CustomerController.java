@@ -31,7 +31,7 @@ public class CustomerController {
     public ResponseEntity<Object> findCustomerByMobileNumber(@RequestParam String mobileNumber) {
         CustomerDto customer = customerService.findByMobileNumber(mobileNumber);
         return new ResponseEntity<>(
-                new SuccessDetailsResponse(true, "Customer found", customer),
+                new SuccessDetailsResponse(true, "Customer successfully found", customer),
                 HttpStatus.OK);
     }
 }
