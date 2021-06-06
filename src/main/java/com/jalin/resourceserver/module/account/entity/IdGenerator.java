@@ -7,13 +7,12 @@ import org.hibernate.id.IdentifierGenerator;
 import java.io.Serializable;
 import java.util.Date;
 
-public class AccountNumberGenerator implements IdentifierGenerator {
+public class IdGenerator implements IdentifierGenerator {
     @Override
     public Serializable generate(
             SharedSessionContractImplementor sharedSessionContractImplementor,
             Object o) throws HibernateException {
         Date date = new Date();
-        String generatedId = String.format("%tQ", date);
-        return generatedId;
+        return String.format("%tQ", date);
     }
 }
