@@ -31,8 +31,8 @@ public class AccountController {
     }
 
     @GetMapping("/accounts/{accountNumber}")
-    public ResponseEntity<Object> getByAccountNumber(@PathVariable String accountNumber) {
-        AccountDto accountDto = accountService.getByAccountNumber(accountNumber);
+    public ResponseEntity<Object> getAccountByAccountNumber(@PathVariable String accountNumber) {
+        AccountDto accountDto = accountService.getAccountByAccountNumber(accountNumber);
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Banking account successfully found", accountDto),
                 HttpStatus.OK);

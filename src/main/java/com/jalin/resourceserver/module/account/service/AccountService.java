@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface AccountService {
     void addNewAccount(UUID customerId, Account requestBody);
-    AccountDto getByAccountNumber(String accountNumber);
+    AccountDto getAccountByAccountNumber(String accountNumber);
 }

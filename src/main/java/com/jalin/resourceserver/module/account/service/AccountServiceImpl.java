@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto getByAccountNumber(String accountNumber) {
+    public AccountDto getAccountByAccountNumber(String accountNumber) {
         Account account = accountRepository.findById(accountNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Account with account number %s not found", accountNumber)));
