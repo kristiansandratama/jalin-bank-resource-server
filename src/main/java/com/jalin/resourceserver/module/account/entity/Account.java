@@ -39,4 +39,10 @@ public class Account {
         this.currency = currency;
         this.balance = balance;
     }
+
+    public Account(String currency, BigDecimal balance, Customer customer) {
+        this.currency = currency;
+        this.balance = balance;
+        this.customer = customer;
+    }
 }
