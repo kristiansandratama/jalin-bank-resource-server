@@ -1,6 +1,7 @@
 package com.jalin.resourceserver.module.account.service;
 
 import com.jalin.resourceserver.exception.ResourceNotFoundException;
+import com.jalin.resourceserver.exception.TransactionNotAllowedException;
 import com.jalin.resourceserver.module.account.entity.Account;
 import com.jalin.resourceserver.module.account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class TransferServiceImpl implements TransferService{
 
     @Override
     public void fundTransfer(String sourceAccountNumber, String beneficiaryAccountNumber, BigDecimal amount) {
+        if (sourceAccountNumber.equals(beneficiaryAccountNumber)) {
+            throw new TransactionNotAllowedException(
+                    "The beneficiary account number cannot be the same as the source account number");
+        }
+
         Account sourceAccount = accountRepository.findById(sourceAccountNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Account with account number %s not found", sourceAccountNumber)));
@@ -25,11 +31,11 @@ public class TransferServiceImpl implements TransferService{
                         String.format("Account with account number %s not found", beneficiaryAccountNumber)));
 
         if (!matchCurrency(sourceAccount, beneficiaryAccount)) {
-            throw new RuntimeException("Currency does not match");
+            throw new TransactionNotAllowedException("Currency does not match");
         } else if (!sourceAccount.getCurrency().equals("IDR") || !beneficiaryAccount.getCurrency().equals("IDR")) {
-            throw new RuntimeException("Fund transfers with foreign currency are currently not supported");
+            throw new TransactionNotAllowedException("Fund transfers with foreign currency are currently not supported");
         } else if (sourceAccount.getBalance().subtract(amount).compareTo(IDR_MIN_BALANCE) < 0) {
-            throw new RuntimeException("Insufficient balance");
+            throw new TransactionNotAllowedException("Insufficient balance");
         } else {
             sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
             beneficiaryAccount.setBalance(beneficiaryAccount.getBalance().add(amount));
