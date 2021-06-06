@@ -27,7 +27,7 @@ public class CustomerController {
                 HttpStatus.CREATED);
     }
 
-    @PostMapping("/customers/find")
+    @GetMapping("/customers/find")
     public ResponseEntity<Object> findCustomerByMobileNumber(@RequestParam String mobileNumber) {
         CustomerDto customer = customerService.findByMobileNumber(mobileNumber);
         return new ResponseEntity<>(
