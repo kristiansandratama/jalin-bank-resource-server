@@ -26,7 +26,7 @@ public class AccountController {
             @Valid @RequestBody AddNewAccountRequest requestBody) {
         accountService.addNewAccount(customerId, new Account(requestBody.getCurrency(), requestBody.getBalance()));
         return new ResponseEntity<>(
-                new SuccessResponse(true, "New banking account successfully added"),
+                new SuccessResponse(true, "New bank account successfully added"),
                 HttpStatus.CREATED);
     }
 
@@ -34,7 +34,7 @@ public class AccountController {
     public ResponseEntity<Object> getAccountByAccountNumber(@PathVariable String accountNumber) {
         AccountDto accountDto = accountService.getAccountByAccountNumber(accountNumber);
         return new ResponseEntity<>(
-                new SuccessDetailsResponse(true, "Banking account successfully found", accountDto),
+                new SuccessDetailsResponse(true, "Bank account successfully found", accountDto),
                 HttpStatus.OK);
     }
 }
