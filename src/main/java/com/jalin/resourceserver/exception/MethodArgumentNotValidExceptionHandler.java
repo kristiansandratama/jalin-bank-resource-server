@@ -24,10 +24,7 @@ public class MethodArgumentNotValidExceptionHandler {
             errorDetails.add(error);
         }
         return new ResponseEntity<>(
-                new ErrorDetailsResponse(
-                        false,
-                        "Request body is not valid",
-                        errorDetails),
+                new ErrorDetailsResponse(false, errorDetails),
                 HttpStatus.BAD_REQUEST);
     }
 }

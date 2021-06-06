@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class ErrorDetailsResponse {
     private Boolean success;
-    private String message;
-    private Object errors;
+    private List<ErrorDetails> errors;
 
     @NoArgsConstructor
     @AllArgsConstructor
