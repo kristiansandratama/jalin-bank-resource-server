@@ -22,8 +22,8 @@ public class Customer {
     @Id
     @GeneratedValue
     private UUID customerId;
+    private String idCardNumber;
     private String fullName;
-    private String mobileNumber;
     @OneToMany(
             cascade = CascadeType.ALL,
             mappedBy = "customer",
@@ -34,8 +34,8 @@ public class Customer {
     @UpdateTimestamp
     private Date modifiedDate;
 
-    public Customer(String fullName, String mobileNumber) {
+    public Customer(String idCardNumber, String fullName) {
+        this.idCardNumber = idCardNumber;
         this.fullName = fullName;
-        this.mobileNumber = mobileNumber;
     }
 }
