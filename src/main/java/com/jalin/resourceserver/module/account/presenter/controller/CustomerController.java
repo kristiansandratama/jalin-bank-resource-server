@@ -21,15 +21,15 @@ public class CustomerController {
 
     @PostMapping("/customers")
     public ResponseEntity<Object> addNewCustomer(@Valid @RequestBody AddNewCustomerRequest requestBody) {
-        customerService.addNewCustomer(new Customer(requestBody.getFullName(), requestBody.getMobileNumber()));
+        CustomerDto newCustomer = customerService.addNewCustomer(new Customer(requestBody.getIdCardNumber(), requestBody.getFullName()));
         return new ResponseEntity<>(
-                new SuccessResponse(true, "New customer successfully added"),
+                new SuccessDetailsResponse(true, "New customer successfully added", newCustomer),
                 HttpStatus.CREATED);
     }
 
     @GetMapping("/customers/find")
-    public ResponseEntity<Object> findCustomerByMobileNumber(@RequestParam String mobileNumber) {
-        CustomerDto customer = customerService.findCustomerByMobileNumber(mobileNumber);
+    public ResponseEntity<Object> findCustomerByIdCardNumber(@RequestParam String idCardNumber) {
+        CustomerDto customer = customerService.findCustomerByIdCardNumber(idCardNumber);
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Customer successfully found", customer),
                 HttpStatus.OK);
