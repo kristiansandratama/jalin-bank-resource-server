@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface AccountService {
-    void addNewAccount(UUID customerId, Account requestBody);
+    AccountDto addNewAccount(UUID customerId, Account requestBody);
     AccountDto getAccountByAccountNumber(String accountNumber);
     Set<TransactionDto> getTransactionsByAccountNumber(String accountNumber);
 }

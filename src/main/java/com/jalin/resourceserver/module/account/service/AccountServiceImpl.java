@@ -33,7 +33,7 @@ public class AccountServiceImpl implements AccountService {
     private TransactionRepository transactionRepository;
 
     @Override
-    public void addNewAccount(UUID customerId, Account requestBody) {
+    public AccountDto addNewAccount(UUID customerId, Account requestBody) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer Id %s not found", customerId)));
@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
                 requestBody.getCurrency(),
                 requestBody.getBalance(),
                 customer);
-        accountRepository.save(newAccount);
+        return modelMapperUtility.mapper().map(accountRepository.save(newAccount), AccountDto.class);
     }
 
     @Override

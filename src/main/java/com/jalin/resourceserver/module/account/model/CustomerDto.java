@@ -15,6 +15,5 @@ import java.util.UUID;
 public class CustomerDto {
     private UUID customerId;
     private String fullName;
-    private String mobileNumber;
     private Set<AccountDto> accounts;
 }
