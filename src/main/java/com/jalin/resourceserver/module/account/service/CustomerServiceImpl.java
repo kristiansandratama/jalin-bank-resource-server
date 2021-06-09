@@ -9,6 +9,8 @@ import com.jalin.resourceserver.utility.ModelMapperUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
@@ -19,18 +21,22 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public void addNewCustomer(Customer requestBody) {
+    public CustomerDto addNewCustomer(Customer requestBody) {
         Customer newCustomer = new Customer(
-                requestBody.getFullName(),
-                requestBody.getMobileNumber());
-        customerRepository.save(newCustomer);
+                requestBody.getIdCardNumber(),
+                requestBody.getFullName());
+
+        CustomerDto newCustomerDto = modelMapperUtility.mapper()
+                .map(customerRepository.save(newCustomer), CustomerDto.class);
+        newCustomerDto.setAccounts(new HashSet<>());
+        return newCustomerDto;
     }
 
     @Override
-    public CustomerDto findCustomerByMobileNumber(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+    public CustomerDto findCustomerByIdCardNumber(String idCardNumber) {
+        Customer customer = customerRepository.findByIdCardNumber(idCardNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        String.format("Customer with mobile number %s not found", mobileNumber)));
+                        String.format("Customer with ID card number %s not found", idCardNumber)));
         return modelMapperUtility.mapper().map(customer, CustomerDto.class);
     }
 }

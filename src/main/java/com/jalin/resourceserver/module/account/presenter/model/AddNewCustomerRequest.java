@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class AddNewCustomerRequest {
     @NotBlank
-    private String fullName;
+    private String idCardNumber;
     @NotBlank
-    private String mobileNumber;
+    private String fullName;
 }
