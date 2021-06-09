@@ -26,9 +26,9 @@ public class AccountController {
     public ResponseEntity<Object> addNewAccount(
             @RequestParam UUID customerId,
             @Valid @RequestBody AddNewAccountRequest requestBody) {
-        accountService.addNewAccount(customerId, new Account(requestBody.getCurrency(), requestBody.getBalance()));
+        AccountDto newAccount = accountService.addNewAccount(customerId, new Account(requestBody.getCurrency(), requestBody.getBalance()));
         return new ResponseEntity<>(
-                new SuccessResponse(true, "New bank account successfully added"),
+                new SuccessDetailsResponse(true, "New bank account successfully added", newAccount),
                 HttpStatus.CREATED);
     }
 
