@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 @Service
 public class TransferServiceImpl implements TransferService{
-    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("50000");
+    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
     @Autowired
     private DateGeneratorUtility dateGeneratorUtility;
     @Autowired
