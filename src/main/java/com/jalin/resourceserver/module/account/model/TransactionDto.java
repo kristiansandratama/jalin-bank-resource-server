@@ -12,8 +12,10 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class TransactionDto {
+    private String transactionId;
     private String transactionDate;
     private String transactionType;
+    private String currency;
     private BigDecimal amount;
     private String transactionName;
     private String transactionDescription;
