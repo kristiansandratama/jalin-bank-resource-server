@@ -1,6 +1,7 @@
 package com.jalin.resourceserver.module.account.presenter.controller;
 
-import com.jalin.resourceserver.model.SuccessResponse;
+import com.jalin.resourceserver.model.SuccessDetailsResponse;
+import com.jalin.resourceserver.module.account.model.TransferDto;
 import com.jalin.resourceserver.module.account.presenter.model.FundTransferRequest;
 import com.jalin.resourceserver.module.account.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class TransferController {
 
     @PostMapping("/transfers")
     public ResponseEntity<Object> fundTransfer(@Valid @RequestBody FundTransferRequest requestBody) {
-        transferService.fundTransfer(
+        TransferDto transferDto = transferService.fundTransfer(
                 requestBody.getSourceAccountNumber(),
                 requestBody.getBeneficiaryAccountNumber(),
                 requestBody.getAmount());
         return new ResponseEntity<>(
-                new SuccessResponse(true, "Fund successfully transferred"),
-                HttpStatus.OK);
+                new SuccessDetailsResponse(true, "Fund successfully transferred", transferDto),
+                HttpStatus.CREATED);
     }
 }
