@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
                 requestBody.getCurrency(),
                 requestBody.getBalance(),
                 customer);
-        return modelMapperUtility.mapper().map(accountRepository.save(newAccount), AccountDto.class);
+        return modelMapperUtility.initialize().map(accountRepository.save(newAccount), AccountDto.class);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(accountNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Account with account number %s not found", accountNumber)));
-        return modelMapperUtility.mapper().map(account, AccountDto.class);
+        return modelMapperUtility.initialize().map(account, AccountDto.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
                 dateGeneratorUtility.generateDate());
         Set<TransactionDto> transactionDtoSet = new HashSet<>();
         for (Transaction transaction : transactionList) {
-            TransactionDto transactionDto = modelMapperUtility.mapper().map(transaction, TransactionDto.class);
+            TransactionDto transactionDto = modelMapperUtility.initialize().map(transaction, TransactionDto.class);
             transactionDtoSet.add(transactionDto);
         }
         return transactionDtoSet;

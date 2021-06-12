@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
                 requestBody.getIdCardNumber(),
                 requestBody.getFullName());
 
-        CustomerDto newCustomerDto = modelMapperUtility.mapper()
+        CustomerDto newCustomerDto = modelMapperUtility.initialize()
                 .map(customerRepository.save(newCustomer), CustomerDto.class);
         newCustomerDto.setAccounts(new HashSet<>());
         return newCustomerDto;
@@ -37,6 +37,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.findByIdCardNumber(idCardNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with ID card number %s not found", idCardNumber)));
-        return modelMapperUtility.mapper().map(customer, CustomerDto.class);
+        return modelMapperUtility.initialize().map(customer, CustomerDto.class);
     }
 }
