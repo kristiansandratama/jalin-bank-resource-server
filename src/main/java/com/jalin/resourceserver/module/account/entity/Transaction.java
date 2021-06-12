@@ -9,7 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "transactions")
@@ -24,7 +25,7 @@ public class Transaction {
             strategy = "com.jalin.resourceserver.module.account.entity.IdGenerator")
     @GeneratedValue(generator = "transactionId")
     private String transactionId;
-    private String transactionDate;
+    private LocalDate transactionDate;
     private String transactionType;
     private String currency;
     private BigDecimal amount;
@@ -34,5 +35,5 @@ public class Transaction {
     @JoinColumn(name = "account_number")
     private Account account;
     @CreationTimestamp
-    private Date createdDate;
+    private Instant createdDate;
 }
