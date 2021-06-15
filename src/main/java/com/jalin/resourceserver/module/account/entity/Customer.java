@@ -8,7 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Set;
 import java.util.UUID;
 
@@ -30,9 +30,9 @@ public class Customer {
             orphanRemoval = true)
     private Set<Account> accounts ;
     @CreationTimestamp
-    private Date createdDate;
+    private Instant createdDate;
     @UpdateTimestamp
-    private Date modifiedDate;
+    private Instant modifiedDate;
 
     public Customer(String idCardNumber, String fullName) {
         this.idCardNumber = idCardNumber;

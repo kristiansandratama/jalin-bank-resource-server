@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ModelMapperUtility {
-    public ModelMapper mapper() {
+    public ModelMapper initialize() {
         return new ModelMapper();
     }
 }

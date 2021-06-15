@@ -4,26 +4,34 @@ import com.jalin.resourceserver.exception.ResourceNotFoundException;
 import com.jalin.resourceserver.exception.TransactionNotAllowedException;
 import com.jalin.resourceserver.module.account.entity.Account;
 import com.jalin.resourceserver.module.account.entity.Transaction;
+import com.jalin.resourceserver.module.account.model.TransactionDto;
+import com.jalin.resourceserver.module.account.model.TransferDto;
 import com.jalin.resourceserver.module.account.repository.AccountRepository;
 import com.jalin.resourceserver.module.account.repository.TransactionRepository;
-import com.jalin.resourceserver.utility.DateGeneratorUtility;
+import com.jalin.resourceserver.utility.ModelMapperUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Service
 public class TransferServiceImpl implements TransferService{
+    private static final String JALIN_BANK_CODE = "212";
+    private static final String CREDIT_TRANSACTION_TYPE = "C";
+    private static final String DEBIT_TRANSACTION_TYPE = "D";
+    private static final String IDR_CURRENCY = "IDR";
     private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
+    private static final String TRANSFER_TRANSACTION_NAME = "TRANSFER";
     @Autowired
-    private DateGeneratorUtility dateGeneratorUtility;
+    private ModelMapperUtility modelMapperUtility;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private TransactionRepository transactionRepository;
 
     @Override
-    public void fundTransfer(String sourceAccountNumber, String beneficiaryAccountNumber, BigDecimal amount) {
+    public TransferDto fundTransfer(String sourceAccountNumber, String beneficiaryAccountNumber, BigDecimal amount) {
         if (sourceAccountNumber.equals(beneficiaryAccountNumber)) {
             throw new TransactionNotAllowedException(
                     "The beneficiary account number cannot be the same as the source account number");
@@ -39,7 +47,7 @@ public class TransferServiceImpl implements TransferService{
 
         if (!matchCurrency(sourceAccount, beneficiaryAccount)) {
             throw new TransactionNotAllowedException("Currency does not match");
-        } else if (!sourceAccount.getCurrency().equals("IDR") || !beneficiaryAccount.getCurrency().equals("IDR")) {
+        } else if (!sourceAccount.getCurrency().equals(IDR_CURRENCY) || !beneficiaryAccount.getCurrency().equals(IDR_CURRENCY)) {
             throw new TransactionNotAllowedException("Fund transfers with foreign currency are currently not supported");
         } else if (sourceAccount.getBalance().subtract(amount).compareTo(IDR_MIN_BALANCE) < 0) {
             throw new TransactionNotAllowedException("Insufficient balance");
@@ -49,24 +57,29 @@ public class TransferServiceImpl implements TransferService{
             accountRepository.save(sourceAccount);
             accountRepository.save(beneficiaryAccount);
 
-            Transaction sourceAccountNewTransaction = generateTransaction(
-                    "C",
+            Transaction sourceAccountNewTransaction = initializeTransaction(
+                    CREDIT_TRANSACTION_TYPE,
                     sourceAccount.getCurrency(),
                     amount,
-                    "TRANSFER",
-                    String.format("Transfer to account number %s", beneficiaryAccountNumber),
+                    TRANSFER_TRANSACTION_NAME,
+                    String.format("%s/%s/%s", JALIN_BANK_CODE, beneficiaryAccountNumber, "Transfer to " + beneficiaryAccountNumber),
                     sourceAccount
             );
-            Transaction beneficiaryAccountNewTransaction = generateTransaction(
-                    "D",
+            Transaction beneficiaryAccountNewTransaction = initializeTransaction(
+                    DEBIT_TRANSACTION_TYPE,
                     beneficiaryAccount.getCurrency(),
                     amount,
-                    "TRANSFER",
-                    String.format("Transfer from account number %s", sourceAccountNumber),
+                    TRANSFER_TRANSACTION_NAME,
+                    String.format("%s/%s/%s", JALIN_BANK_CODE, sourceAccountNumber, "Transfer from " + sourceAccountNumber),
                     beneficiaryAccount
             );
-            transactionRepository.save(sourceAccountNewTransaction);
-            transactionRepository.save(beneficiaryAccountNewTransaction);
+            Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
+            Transaction beneficiaryTransaction = transactionRepository.save(beneficiaryAccountNewTransaction);
+
+            TransactionDto sourceTransactionDto = modelMapperUtility.initialize().map(sourceTransaction, TransactionDto.class);
+            TransactionDto beneficiaryTransactionDto = modelMapperUtility.initialize().map(beneficiaryTransaction, TransactionDto.class);
+
+            return new TransferDto(sourceTransactionDto, beneficiaryTransactionDto);
         }
     }
 
@@ -74,7 +87,7 @@ public class TransferServiceImpl implements TransferService{
         return sourceAccount.getCurrency().equals(beneficiaryAccount.getCurrency());
     }
 
-    private Transaction generateTransaction(
+    private Transaction initializeTransaction(
             String transactionType,
             String currency,
             BigDecimal amount,
@@ -82,7 +95,7 @@ public class TransferServiceImpl implements TransferService{
             String transactionDescription,
             Account account) {
         Transaction transaction = new Transaction();
-        transaction.setTransactionDate( dateGeneratorUtility.generateDate());
+        transaction.setTransactionDate(LocalDate.now());
         transaction.setTransactionType(transactionType);
         transaction.setCurrency(currency);
         transaction.setAmount(amount);

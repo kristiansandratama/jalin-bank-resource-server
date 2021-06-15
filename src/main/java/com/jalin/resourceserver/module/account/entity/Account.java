@@ -10,7 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Set;
 
 @Entity
@@ -37,9 +37,9 @@ public class Account {
     @JoinColumn(name = "customer_id")
     private Customer customer;
     @CreationTimestamp
-    private Date createdDate;
+    private Instant createdDate;
     @UpdateTimestamp
-    private Date modifiedDate;
+    private Instant modifiedDate;
 
     public Account(String currency, BigDecimal balance) {
         this.currency = currency;

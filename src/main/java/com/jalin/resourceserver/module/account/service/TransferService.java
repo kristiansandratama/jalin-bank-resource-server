@@ -1,7 +1,9 @@
 package com.jalin.resourceserver.module.account.service;
 
+import com.jalin.resourceserver.module.account.model.TransferDto;
+
 import java.math.BigDecimal;
 
 public interface TransferService {
-    void fundTransfer(String sourceAccountNumber, String beneficiaryAccountNumber, BigDecimal amount);
+    TransferDto fundTransfer(String sourceAccountNumber, String beneficiaryAccountNumber, BigDecimal amount);
 }

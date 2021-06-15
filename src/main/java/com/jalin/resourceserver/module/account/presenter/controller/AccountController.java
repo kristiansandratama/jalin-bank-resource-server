@@ -1,7 +1,6 @@
 package com.jalin.resourceserver.module.account.presenter.controller;
 
 import com.jalin.resourceserver.model.SuccessDetailsResponse;
-import com.jalin.resourceserver.model.SuccessResponse;
 import com.jalin.resourceserver.module.account.entity.Account;
 import com.jalin.resourceserver.module.account.model.AccountDto;
 import com.jalin.resourceserver.module.account.model.TransactionDto;
