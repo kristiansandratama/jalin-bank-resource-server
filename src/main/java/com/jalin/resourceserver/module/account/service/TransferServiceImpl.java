@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Service
 public class TransferServiceImpl implements TransferService{
     private static final String JALIN_BANK_CODE = "212";
+    private static final String JALIN_BANK_NAME = "Bank Jalin";
     private static final String CREDIT_TRANSACTION_TYPE = "C";
     private static final String DEBIT_TRANSACTION_TYPE = "D";
     private static final String IDR_CURRENCY = "IDR";
@@ -62,7 +63,11 @@ public class TransferServiceImpl implements TransferService{
                     sourceAccount.getCurrency(),
                     amount,
                     TRANSFER_TRANSACTION_NAME,
-                    String.format("%s/%s/%s", JALIN_BANK_CODE, beneficiaryAccountNumber, "Transfer to " + beneficiaryAccountNumber),
+                    String.format(
+                            "%s/%s/%s",
+                            JALIN_BANK_CODE,
+                            beneficiaryAccountNumber,
+                            "Transfer to" + " " + JALIN_BANK_NAME + " " + beneficiaryAccountNumber),
                     sourceAccount
             );
             Transaction beneficiaryAccountNewTransaction = initializeTransaction(
@@ -70,7 +75,11 @@ public class TransferServiceImpl implements TransferService{
                     beneficiaryAccount.getCurrency(),
                     amount,
                     TRANSFER_TRANSACTION_NAME,
-                    String.format("%s/%s/%s", JALIN_BANK_CODE, sourceAccountNumber, "Transfer from " + sourceAccountNumber),
+                    String.format(
+                            "%s/%s/%s",
+                            JALIN_BANK_CODE,
+                            sourceAccountNumber,
+                            "Transfer from" + " " + JALIN_BANK_NAME + " " + sourceAccountNumber),
                     beneficiaryAccount
             );
             Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
