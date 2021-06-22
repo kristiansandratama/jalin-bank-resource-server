@@ -29,6 +29,26 @@ public class CorporateSeeder implements CommandLineRunner {
     @Transactional
     private void seed() {
         if (corporateRepository.count() == 0) {
+            Corporate corporateJalin = new Corporate();
+            corporateJalin.setCorporateId("212");
+            corporateJalin.setCorporateName("Bank Jalin");
+            corporateRepository.save(corporateJalin);
+
+            Corporate corporateBri = new Corporate();
+            corporateBri.setCorporateId("002");
+            corporateBri.setCorporateName("Bank BRI");
+            corporateRepository.save(corporateBri);
+
+            Corporate corporateMandiri = new Corporate();
+            corporateMandiri.setCorporateId("008");
+            corporateMandiri.setCorporateName("Bank Mandiri");
+            corporateRepository.save(corporateMandiri);
+
+            Corporate corporateBni = new Corporate();
+            corporateBni.setCorporateId("009");
+            corporateBni.setCorporateName("Bank BNI");
+            corporateRepository.save(corporateBni);
+
             Corporate corporateGopay = new Corporate();
             corporateGopay.setCorporateId("9101");
             corporateGopay.setCorporateName("Gopay");
