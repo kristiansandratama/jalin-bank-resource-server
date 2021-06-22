@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class TransferVirtualServiceImpl implements TransferVirtualService {
     private static final String CREDIT_TRANSACTION_TYPE = "C";
     private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
-    private static final String TRANSFER_TRANSACTION_NAME = "TOP UP";
+    private static final String TOP_UP_TRANSACTION_NAME = "TOP UP";
     @Autowired
     private ModelMapperUtility modelMapperUtility;
     @Autowired
@@ -50,8 +50,12 @@ public class TransferVirtualServiceImpl implements TransferVirtualService {
                 CREDIT_TRANSACTION_TYPE,
                 sourceAccount.getCurrency(),
                 amount,
-                TRANSFER_TRANSACTION_NAME,
-                String.format("%s/%s/%s", corporateId, beneficiaryAccountNumber, "Top up to " + corporate.getCorporateName() + " " + beneficiaryAccountNumber),
+                TOP_UP_TRANSACTION_NAME,
+                String.format(
+                        "%s/%s/%s",
+                        corporateId,
+                        beneficiaryAccountNumber,
+                        "Top up to" + " " + corporate.getCorporateName() + " " + beneficiaryAccountNumber),
                 sourceAccount
         );
         Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
