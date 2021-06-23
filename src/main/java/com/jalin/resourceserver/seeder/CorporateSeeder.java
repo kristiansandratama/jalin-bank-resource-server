@@ -1,6 +1,7 @@
 package com.jalin.resourceserver.seeder;
 
 import com.jalin.resourceserver.module.dummy.entity.Corporate;
+import com.jalin.resourceserver.module.dummy.entity.CorporateTypeEnum;
 import com.jalin.resourceserver.module.dummy.repository.CorporateRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,46 +33,55 @@ public class CorporateSeeder implements CommandLineRunner {
             Corporate corporateJalin = new Corporate();
             corporateJalin.setCorporateId("212");
             corporateJalin.setCorporateName("Bank Jalin");
+            corporateJalin.setCorporateType(CorporateTypeEnum.BANK);
             corporateRepository.save(corporateJalin);
 
             Corporate corporateBri = new Corporate();
             corporateBri.setCorporateId("002");
             corporateBri.setCorporateName("Bank BRI");
+            corporateBri.setCorporateType(CorporateTypeEnum.BANK);
             corporateRepository.save(corporateBri);
 
             Corporate corporateMandiri = new Corporate();
             corporateMandiri.setCorporateId("008");
             corporateMandiri.setCorporateName("Bank Mandiri");
+            corporateMandiri.setCorporateType(CorporateTypeEnum.BANK);
             corporateRepository.save(corporateMandiri);
 
             Corporate corporateBni = new Corporate();
             corporateBni.setCorporateId("009");
             corporateBni.setCorporateName("Bank BNI");
+            corporateBni.setCorporateType(CorporateTypeEnum.BANK);
             corporateRepository.save(corporateBni);
 
             Corporate corporateGopay = new Corporate();
             corporateGopay.setCorporateId("9101");
             corporateGopay.setCorporateName("Gopay");
+            corporateGopay.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateGopay);
 
             Corporate corporateOvo = new Corporate();
             corporateOvo.setCorporateId("9102");
             corporateOvo.setCorporateName("OVO");
+            corporateOvo.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateOvo);
 
             Corporate corporateDana = new Corporate();
             corporateDana.setCorporateId("9103");
             corporateDana.setCorporateName("Dana");
+            corporateDana.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateDana);
 
             Corporate corporateShopeepay = new Corporate();
             corporateShopeepay.setCorporateId("9103");
             corporateShopeepay.setCorporateName("Shopeepay");
+            corporateShopeepay.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateShopeepay);
 
             Corporate corporateLinkAja = new Corporate();
             corporateLinkAja.setCorporateId("9104");
             corporateLinkAja.setCorporateName("LinkAja");
+            corporateLinkAja.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateLinkAja);
         }
     }
