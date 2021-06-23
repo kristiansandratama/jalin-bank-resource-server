@@ -30,3 +30,9 @@
 > - LinkAja (9105)
 - Top Up E-Wallet with Virtual Account
 > POST /api/v1/transfers/virtual
+
+**Corporates**
+- Get all bank corporates
+> GET /api/v1/corporates/bank
+- Get all digital wallet corporates
+> GET /api/v1/corporates/wallet
