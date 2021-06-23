@@ -7,9 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -22,6 +20,8 @@ public class Corporate {
     @Id
     private String corporateId;
     private String corporateName;
+    @Enumerated(EnumType.STRING)
+    private CorporateTypeEnum corporateType;
     @CreationTimestamp
     private Instant createdDate;
     @UpdateTimestamp
