@@ -4,8 +4,8 @@
 **Customers Endpoints**
 - Create new customers
 > POST /api/v1/customers
-- Find by ID card number
-> POST /api/v1/customers/find?idCardNumber={}
+- Find by ID card number or account number
+> GET /api/v1/customers/find?idCardNumber=&accountNumber=
 
 **Accounts Endpoints**
 - Create new accounts
@@ -36,3 +36,5 @@
 > GET /api/v1/corporates/bank
 - Get all digital wallet corporates
 > GET /api/v1/corporates/wallet
+- Get corporate by ID
+> GET /api/v1/corporates/{corporateId}
