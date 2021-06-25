@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,14 @@ public class CorporateController {
         List<CorporateDto> corporateDtoList = corporateService.getDigitalWalletCorporates();
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Digital wallet corporates successfully found", corporateDtoList),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/corporates/{corporateId}")
+    public ResponseEntity<Object> getCorporateById(@PathVariable String corporateId) {
+        CorporateDto corporateDto = corporateService.getCorporateById(corporateId);
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Corporate successfully found", corporateDto),
                 HttpStatus.OK);
     }
 }

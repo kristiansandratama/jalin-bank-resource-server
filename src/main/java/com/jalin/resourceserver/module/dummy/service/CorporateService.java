@@ -7,4 +7,5 @@ import java.util.List;
 public interface CorporateService {
     List<CorporateDto> getBankCorporates();
     List<CorporateDto> getDigitalWalletCorporates();
+    CorporateDto getCorporateById(String corporateId);
 }
