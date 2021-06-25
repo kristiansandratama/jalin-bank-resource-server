@@ -1,7 +1,7 @@
 package com.jalin.resourceserver.module.account.presenter.controller;
 
+import com.jalin.resourceserver.model.ErrorResponse;
 import com.jalin.resourceserver.model.SuccessDetailsResponse;
-import com.jalin.resourceserver.model.SuccessResponse;
 import com.jalin.resourceserver.module.account.entity.Customer;
 import com.jalin.resourceserver.module.account.model.CustomerDto;
 import com.jalin.resourceserver.module.account.presenter.model.AddNewCustomerRequest;
@@ -28,10 +28,27 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/find")
-    public ResponseEntity<Object> findCustomerByIdCardNumber(@RequestParam String idCardNumber) {
-        CustomerDto customer = customerService.findCustomerByIdCardNumber(idCardNumber);
-        return new ResponseEntity<>(
-                new SuccessDetailsResponse(true, "Customer successfully found", customer),
-                HttpStatus.OK);
+    public ResponseEntity<Object> findCustomer(
+            @RequestParam(required = false) String idCardNumber,
+            @RequestParam(required = false) String accountNumber) {
+        if (idCardNumber.isBlank() && accountNumber.isBlank()) {
+            return new ResponseEntity<>(
+                    new ErrorResponse(false, "Parameter idCardNumber and accountNumber are not present"),
+                    HttpStatus.BAD_REQUEST);
+        } else if (!idCardNumber.isBlank() && accountNumber.isBlank()) {
+            CustomerDto customer = customerService.findCustomerByIdCardNumber(idCardNumber);
+            return new ResponseEntity<>(
+                    new SuccessDetailsResponse(true, "Customer successfully found", customer),
+                    HttpStatus.OK);
+        } else if (idCardNumber.isBlank() && !accountNumber.isBlank()) {
+            CustomerDto customer = customerService.findCustomerByAccountNumber(accountNumber);
+            return new ResponseEntity<>(
+                    new SuccessDetailsResponse(true, "Customer successfully found", customer),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(
+                    new ErrorResponse(false, "Please fill only one of the two parameters"),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 }
