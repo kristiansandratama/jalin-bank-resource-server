@@ -1,5 +1,6 @@
 package com.jalin.resourceserver.module.dummy.service;
 
+import com.jalin.resourceserver.exception.ResourceNotFoundException;
 import com.jalin.resourceserver.module.dummy.entity.Corporate;
 import com.jalin.resourceserver.module.dummy.entity.CorporateTypeEnum;
 import com.jalin.resourceserver.module.dummy.model.CorporateDto;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CorporateServiceImpl implements CorporateService {
@@ -42,5 +41,14 @@ public class CorporateServiceImpl implements CorporateService {
             corporateDtoList.add(corporateDto);
         }
         return corporateDtoList;
+    }
+
+    @Override
+    public CorporateDto getCorporateById(String corporateId) {
+        Corporate corporate = corporateRepository.findById(corporateId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Corporate with corporate ID %s not found", corporateId)));
+        return modelMapperUtility.initialize()
+                .map(corporate, CorporateDto.class);
     }
 }
