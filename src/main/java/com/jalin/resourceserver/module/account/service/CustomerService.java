@@ -6,4 +6,5 @@ import com.jalin.resourceserver.module.account.model.CustomerDto;
 public interface CustomerService {
     CustomerDto addNewCustomer(Customer requestBody);
     CustomerDto findCustomerByIdCardNumber(String idCardNumber);
+    CustomerDto findCustomerByAccountNumber(String accountNumber);
 }

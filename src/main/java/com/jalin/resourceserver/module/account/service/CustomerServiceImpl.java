@@ -1,6 +1,7 @@
 package com.jalin.resourceserver.module.account.service;
 
 import com.jalin.resourceserver.exception.ResourceNotFoundException;
+import com.jalin.resourceserver.module.account.entity.Account;
 import com.jalin.resourceserver.module.account.entity.Customer;
 import com.jalin.resourceserver.module.account.model.CustomerDto;
 import com.jalin.resourceserver.module.account.repository.AccountRepository;
@@ -38,5 +39,13 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with ID card number %s not found", idCardNumber)));
         return modelMapperUtility.initialize().map(customer, CustomerDto.class);
+    }
+
+    @Override
+    public CustomerDto findCustomerByAccountNumber(String accountNumber) {
+        Account account = accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Account with number %s not found", accountNumber)));
+        return modelMapperUtility.initialize().map(account.getCustomer(), CustomerDto.class);
     }
 }
