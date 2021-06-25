@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @Service
 public class TransferDomesticServiceImpl implements TransferDomesticService {
     private static final String CREDIT_TRANSACTION_TYPE = "C";
-    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
-    private static final String TRANSFER_DOMESTIC_TRANSACTION_NAME = "TRANSFER DOMESTIC";
+    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("10000");
+    private static final String TRANSFER_DOMESTIC_TRANSACTION_NAME = "TRANSFER_DOMESTIC";
     @Autowired
     private ModelMapperUtility modelMapperUtility;
     @Autowired

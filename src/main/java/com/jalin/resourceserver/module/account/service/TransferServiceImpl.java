@@ -22,7 +22,7 @@ public class TransferServiceImpl implements TransferService{
     private static final String CREDIT_TRANSACTION_TYPE = "C";
     private static final String DEBIT_TRANSACTION_TYPE = "D";
     private static final String IDR_CURRENCY = "IDR";
-    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
+    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("10000");
     private static final String TRANSFER_TRANSACTION_NAME = "TRANSFER";
     @Autowired
     private ModelMapperUtility modelMapperUtility;

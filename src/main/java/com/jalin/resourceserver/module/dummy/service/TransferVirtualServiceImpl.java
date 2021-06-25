@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @Service
 public class TransferVirtualServiceImpl implements TransferVirtualService {
     private static final String CREDIT_TRANSACTION_TYPE = "C";
-    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("0");
-    private static final String TOP_UP_TRANSACTION_NAME = "TOP UP";
+    private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("10000");
+    private static final String TOP_UP_TRANSACTION_NAME = "TOP_UP";
     @Autowired
     private ModelMapperUtility modelMapperUtility;
     @Autowired
