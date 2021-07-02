@@ -44,6 +44,18 @@ public class CorporateServiceImpl implements CorporateService {
     }
 
     @Override
+    public List<CorporateDto> getMerchantCorporates() {
+        List<Corporate> corporateList = corporateRepository.findByCorporateTypeOrderByCorporateNameAsc(CorporateTypeEnum.MERCHANT);
+        List<CorporateDto> corporateDtoList = new ArrayList<>();
+        for (Corporate corporate : corporateList) {
+            CorporateDto corporateDto = modelMapperUtility.initialize()
+                    .map(corporate, CorporateDto.class);
+            corporateDtoList.add(corporateDto);
+        }
+        return corporateDtoList;
+    }
+
+    @Override
     public CorporateDto getCorporateById(String corporateId) {
         Corporate corporate = corporateRepository.findById(corporateId)
                 .orElseThrow(() -> new ResourceNotFoundException(
