@@ -36,5 +36,7 @@
 > GET /api/v1/corporates/bank
 - Get all digital wallet corporates
 > GET /api/v1/corporates/wallet
+- Get all merchant corporates
+> GET /api/v1/corporates/merchant
 - Get corporate by ID
 > GET /api/v1/corporates/{corporateId}
