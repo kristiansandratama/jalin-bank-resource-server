@@ -35,6 +35,14 @@ public class CorporateController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/corporates/merchant")
+    public ResponseEntity<Object> getMerchantCorporates() {
+        List<CorporateDto> corporateDtoList = corporateService.getMerchantCorporates();
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Merchant corporates successfully found", corporateDtoList),
+                HttpStatus.OK);
+    }
+
     @GetMapping("/corporates/{corporateId}")
     public ResponseEntity<Object> getCorporateById(@PathVariable String corporateId) {
         CorporateDto corporateDto = corporateService.getCorporateById(corporateId);
