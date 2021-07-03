@@ -31,6 +31,10 @@
 - Top Up E-Wallet with Virtual Account
 > POST /api/v1/transfers/virtual
 
+**Payment**
+- Pay with QR
+> POST /api/v1/payment/qr
+
 **Corporates**
 - Get all bank corporates
 > GET /api/v1/corporates/bank
