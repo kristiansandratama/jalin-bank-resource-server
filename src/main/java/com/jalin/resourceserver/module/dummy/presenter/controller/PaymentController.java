@@ -2,6 +2,7 @@ package com.jalin.resourceserver.module.dummy.presenter.controller;
 
 import com.jalin.resourceserver.model.SuccessDetailsResponse;
 import com.jalin.resourceserver.module.account.model.TransactionDto;
+import com.jalin.resourceserver.module.dummy.presenter.model.PaymentMobilePhoneCreditRequest;
 import com.jalin.resourceserver.module.dummy.presenter.model.PaymentQrRequest;
 import com.jalin.resourceserver.module.dummy.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,18 @@ public class PaymentController {
         TransactionDto transactionDto = paymentService.payWithQr(
                 requestBody.getSourceAccountNumber(),
                 requestBody.getCorporateId(),
+                requestBody.getAmount());
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Payment successful", transactionDto),
+                HttpStatus.CREATED);
+    }
+
+    @PostMapping("/payment/mobile/prepaid/credit")
+    public ResponseEntity<Object> payMobilePhoneCredit(@Valid @RequestBody PaymentMobilePhoneCreditRequest requestBody) {
+        TransactionDto transactionDto = paymentService.payMobilePhoneCredit(
+                requestBody.getSourceAccountNumber(),
+                requestBody.getCorporateId(),
+                requestBody.getMobilePhoneNumber(),
                 requestBody.getAmount());
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Payment successful", transactionDto),
