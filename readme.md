@@ -35,6 +35,20 @@
 - Pay with QR
 > POST /api/v1/payment/qr
 
+**Provider**
+- Get all providers
+> GET /api/v1/providers
+- Get provider by ID
+> GET /api/v1/providers/{providerId}
+- Get provider by Prefix
+> GET /api/v1/providers/find?prefixNumber=
+
+**Prepaid**
+- Get mobile phone credit prepaid options
+> GET /api/v1/prepaid/mobile/credit  
+- Get mobile phone credit prepaid option by ID
+> GET /api/v1/prepaid/mobile/credit/{prepaidID}
+
 **Corporates**
 - Get all bank corporates
 > GET /api/v1/corporates/bank
