@@ -6,4 +6,5 @@ import java.math.BigDecimal;
 
 public interface PaymentService {
     TransactionDto payWithQr(String sourceAccountNumber, String corporateId, BigDecimal amount);
+    TransactionDto payMobilePhoneCredit(String sourceAccountNumber, String corporateId, String mobilePhoneNumber, BigDecimal amount);
 }

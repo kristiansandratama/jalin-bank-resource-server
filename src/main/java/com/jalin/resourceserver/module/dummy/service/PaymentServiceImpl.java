@@ -21,6 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
     private static final String CREDIT_TRANSACTION_TYPE = "C";
     private static final BigDecimal IDR_MIN_BALANCE = new BigDecimal("10000");
     private static final String PAYMENT_QR_TRANSACTION_NAME = "PAYMENT_QR";
+    private static final String PAYMENT_MOBILE_PHONE_CREDIT_TRANSACTION_NAME = "PAYMENT_MOBILE_PHONE_CREDIT";
     @Autowired
     private ModelMapperUtility modelMapperUtility;
     @Autowired
@@ -56,6 +57,38 @@ public class PaymentServiceImpl implements PaymentService {
                         corporateId,
                         null,
                         "Pay to" + " " + corporate.getCorporateName()),
+                sourceAccount
+        );
+        Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
+        return modelMapperUtility.initialize().map(sourceTransaction, TransactionDto.class);
+    }
+
+    @Override
+    public TransactionDto payMobilePhoneCredit(String sourceAccountNumber, String corporateId, String mobilePhoneNumber, BigDecimal amount) {
+        Account sourceAccount = accountRepository.findById(sourceAccountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Account with account number %s not found", sourceAccountNumber)));
+
+        Corporate corporate = corporateRepository.findById(corporateId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Corporate with corporate ID %s not found", corporateId)));
+
+        if (sourceAccount.getBalance().subtract(amount).compareTo(IDR_MIN_BALANCE) < 0) {
+            throw new TransactionNotAllowedException("Insufficient balance");
+        }
+
+        sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
+
+        Transaction sourceAccountNewTransaction = initializeTransaction(
+                CREDIT_TRANSACTION_TYPE,
+                sourceAccount.getCurrency(),
+                amount,
+                PAYMENT_MOBILE_PHONE_CREDIT_TRANSACTION_NAME,
+                String.format(
+                        "%s/%s/%s",
+                        corporateId,
+                        mobilePhoneNumber,
+                        "Pay to mobile phone prepaid credit to" + " " + corporate.getCorporateName() + " " + mobilePhoneNumber),
                 sourceAccount
         );
         Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
