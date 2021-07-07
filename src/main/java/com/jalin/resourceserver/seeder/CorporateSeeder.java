@@ -95,6 +95,18 @@ public class CorporateSeeder implements CommandLineRunner {
             corporateSushiTei.setCorporateName("Sushi Tei Grand Indonesia");
             corporateSushiTei.setCorporateType(CorporateTypeEnum.MERCHANT);
             corporateRepository.save(corporateSushiTei);
+
+            Corporate corporateTelkomsel = new Corporate();
+            corporateTelkomsel.setCorporateId("7001");
+            corporateTelkomsel.setCorporateName("TELKOMSEL");
+            corporateTelkomsel.setCorporateType(CorporateTypeEnum.TELECOMS);
+            corporateRepository.save(corporateTelkomsel);
+
+            Corporate corporateXlAxiata = new Corporate();
+            corporateXlAxiata.setCorporateId("7002");
+            corporateXlAxiata.setCorporateName("XL Axiata");
+            corporateXlAxiata.setCorporateType(CorporateTypeEnum.TELECOMS);
+            corporateRepository.save(corporateXlAxiata);
         }
     }
 }
