@@ -23,6 +23,7 @@ public class Prepaid {
     @GeneratedValue
     private UUID prepaidId;
     private String prepaidName;
+    private String prepaidDetails;
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private PrepaidTypeEnum prepaidType;

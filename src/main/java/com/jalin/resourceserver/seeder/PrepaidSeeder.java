@@ -90,6 +90,80 @@ public class PrepaidSeeder implements CommandLineRunner {
             prepaid200.setPrice(new BigDecimal("200000"));
             prepaid200.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_CREDIT);
             prepaidRepository.save(prepaid200);
+
+            Prepaid prepaidData250 = new Prepaid();
+            prepaidData250.setPrepaidName("Data Flash 250MB");
+            prepaidData250.setPrepaidDetails("all network + bebas zona, 7 hari, 250MB");
+            prepaidData250.setPrice(new BigDecimal("10500"));
+            prepaidData250.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData250);
+
+            Prepaid prepaidData500 = new Prepaid();
+            prepaidData500.setPrepaidName("Data Flash 500MB");
+            prepaidData500.setPrepaidDetails("all network + bebas zona, 7 hari, 500MB");
+            prepaidData500.setPrice(new BigDecimal("13500"));
+            prepaidData500.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData500);
+
+            Prepaid prepaidData750 = new Prepaid();
+            prepaidData750.setPrepaidName("Data Flash 750MB");
+            prepaidData750.setPrepaidDetails("all network + bebas zona, 7 hari, 750MB");
+            prepaidData750.setPrice(new BigDecimal("17900"));
+            prepaidData750.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData750);
+
+            Prepaid prepaidData2000 = new Prepaid();
+            prepaidData2000.setPrepaidName("Data Flash 2GB");
+            prepaidData2000.setPrepaidDetails("all network + bebas zona, 7 hari, 2GB");
+            prepaidData2000.setPrice(new BigDecimal("36000"));
+            prepaidData2000.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData2000);
+
+            Prepaid prepaidData7Days30 = new Prepaid();
+            prepaidData7Days30.setPrepaidName("Internet OMG 30rb/7 hari");
+            prepaidData7Days30.setPrepaidDetails("all network + bebas zona, 7 hari, 10GB");
+            prepaidData7Days30.setPrice(new BigDecimal("30000"));
+            prepaidData7Days30.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData7Days30);
+
+            Prepaid prepaidData30Days50 = new Prepaid();
+            prepaidData30Days50.setPrepaidName("Internet OMG 50rb/30 hari");
+            prepaidData30Days50.setPrepaidDetails("all network + bebas zona, 30 hari, 12GB");
+            prepaidData30Days50.setPrice(new BigDecimal("50000"));
+            prepaidData30Days50.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData30Days50);
+
+            Prepaid prepaidData30Days75 = new Prepaid();
+            prepaidData30Days75.setPrepaidName("Internet OMG 75rb/30 hari");
+            prepaidData30Days75.setPrepaidDetails("all network + bebas zona, 30 hari, 18GB");
+            prepaidData30Days75.setPrice(new BigDecimal("75000"));
+            prepaidData30Days75.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData7Days30);
+
+            Prepaid prepaidData30Days100 = new Prepaid();
+            prepaidData30Days100.setPrepaidName("Internet OMG 100rb/30 hari");
+            prepaidData30Days100.setPrepaidDetails("all network + bebas zona, 30 hari, 21GB");
+            prepaidData30Days100.setPrice(new BigDecimal("100000"));
+            prepaidData30Days100.setPrepaidType(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+            prepaidRepository.save(prepaidData30Days100);
+
+            Prepaid prepaid20Electricity = new Prepaid();
+            prepaid20Electricity.setPrepaidName("Token PLN 20.000");
+            prepaid20Electricity.setPrice(new BigDecimal("22000"));
+            prepaid20Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid20Electricity);
+
+            Prepaid prepaid50Electricity = new Prepaid();
+            prepaid50Electricity.setPrepaidName("Token PLN 50.000");
+            prepaid50Electricity.setPrice(new BigDecimal("52000"));
+            prepaid50Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid50Electricity);
+
+            Prepaid prepaid100Electricity = new Prepaid();
+            prepaid100Electricity.setPrepaidName("Token PLN 100.000");
+            prepaid100Electricity.setPrice(new BigDecimal("102000"));
+            prepaid100Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid100Electricity);
         }
     }
 }
