@@ -60,4 +60,12 @@ public class PrepaidController {
                 new SuccessDetailsResponse(true, "Mobile phone data prepaid successfully found", prepaidDetailsDto),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/prepaid/electricity/{prepaidId}")
+    public ResponseEntity<Object> getElectricityPrepaidById(@PathVariable UUID prepaidId) {
+        PrepaidDto prepaidDto = prepaidService.getElectricityPrepaidById(prepaidId);
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Electricity prepaid successfully found", prepaidDto),
+                HttpStatus.OK);
+    }
 }

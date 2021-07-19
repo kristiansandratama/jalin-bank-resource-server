@@ -74,4 +74,13 @@ public class PrepaidServiceImpl implements PrepaidService {
 
         return modelMapperUtility.initialize().map(prepaid, PrepaidDetailsDto.class);
     }
+
+    @Override
+    public PrepaidDto getElectricityPrepaidById(UUID prepaidId) {
+        Prepaid prepaid = prepaidRepository.findById(prepaidId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Electricity prepaid with ID %s not found", prepaidId)));
+
+        return modelMapperUtility.initialize().map(prepaid, PrepaidDto.class);
+    }
 }
