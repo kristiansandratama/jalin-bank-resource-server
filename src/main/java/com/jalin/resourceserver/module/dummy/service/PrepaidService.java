@@ -9,5 +9,6 @@ import java.util.UUID;
 public interface PrepaidService {
     List<PrepaidDto> getMobilePhoneCreditPrepaid();
     List<PrepaidDetailsDto> getMobilePhoneDataPrepaid();
+    List<PrepaidDto> getElectricityPrepaid();
     PrepaidDto getMobilePhoneCreditPrepaidById(UUID prepaidId);
 }

@@ -46,6 +46,18 @@ public class PrepaidServiceImpl implements PrepaidService {
     }
 
     @Override
+    public List<PrepaidDto> getElectricityPrepaid() {
+        List<Prepaid> prepaidList = prepaidRepository.findByPrepaidTypeOrderByPriceAsc(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+        List<PrepaidDto> prepaidDtoList = new ArrayList<>();
+        for (Prepaid prepaid : prepaidList) {
+            PrepaidDto prepaidDto = modelMapperUtility.initialize()
+                    .map(prepaid, PrepaidDto.class);
+            prepaidDtoList.add(prepaidDto);
+        }
+        return prepaidDtoList;
+    }
+
+    @Override
     public PrepaidDto getMobilePhoneCreditPrepaidById(UUID prepaidId) {
         Prepaid prepaid = prepaidRepository.findById(prepaidId)
                 .orElseThrow(() -> new ResourceNotFoundException(

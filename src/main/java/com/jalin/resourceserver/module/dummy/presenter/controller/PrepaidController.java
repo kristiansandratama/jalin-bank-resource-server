@@ -37,6 +37,14 @@ public class PrepaidController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/prepaid/electricity")
+    public ResponseEntity<Object> getElectricityPrepaid() {
+        List<PrepaidDto> prepaidDtoList = prepaidService.getElectricityPrepaid();
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Electricity prepaid successfully found", prepaidDtoList),
+                HttpStatus.OK);
+    }
+
     @GetMapping("/prepaid/mobile/credit/{prepaidId}")
     public ResponseEntity<Object> getMobilePhoneCreditPrepaidById(@PathVariable UUID prepaidId) {
         PrepaidDto prepaidDto = prepaidService.getMobilePhoneCreditPrepaidById(prepaidId);

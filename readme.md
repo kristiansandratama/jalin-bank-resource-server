@@ -45,7 +45,11 @@
 
 **Prepaid**
 - Get mobile phone credit prepaid options
-> GET /api/v1/prepaid/mobile/credit  
+> GET /api/v1/prepaid/mobile/credit
+- Get mobile phone data prepaid options
+> GET /api/v1/prepaid/mobile/credit
+- Get electricity prepaid options
+> GET /api/v1/prepaid/electricity  
 - Get mobile phone credit prepaid option by ID
 > GET /api/v1/prepaid/mobile/credit/{prepaidID}
 
