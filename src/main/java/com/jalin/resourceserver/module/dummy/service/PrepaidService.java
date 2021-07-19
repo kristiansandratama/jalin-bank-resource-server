@@ -11,4 +11,5 @@ public interface PrepaidService {
     List<PrepaidDetailsDto> getMobilePhoneDataPrepaid();
     List<PrepaidDto> getElectricityPrepaid();
     PrepaidDto getMobilePhoneCreditPrepaidById(UUID prepaidId);
+    PrepaidDetailsDto getMobilePhoneDataPrepaidById(UUID prepaidId);
 }

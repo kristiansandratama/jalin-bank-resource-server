@@ -52,4 +52,12 @@ public class PrepaidController {
                 new SuccessDetailsResponse(true, "Mobile phone credit prepaid successfully found", prepaidDto),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/prepaid/mobile/data/{prepaidId}")
+    public ResponseEntity<Object> getMobilePhoneDataPrepaidById(@PathVariable UUID prepaidId) {
+        PrepaidDetailsDto prepaidDetailsDto = prepaidService.getMobilePhoneDataPrepaidById(prepaidId);
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Mobile phone data prepaid successfully found", prepaidDetailsDto),
+                HttpStatus.OK);
+    }
 }

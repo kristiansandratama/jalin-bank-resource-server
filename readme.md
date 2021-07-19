@@ -52,6 +52,8 @@
 > GET /api/v1/prepaid/electricity  
 - Get mobile phone credit prepaid option by ID
 > GET /api/v1/prepaid/mobile/credit/{prepaidID}
+- Get mobile phone data prepaid option by ID
+> GET /api/v1/prepaid/mobile/data/{prepaidID}
 
 **Corporates**
 - Get all bank corporates

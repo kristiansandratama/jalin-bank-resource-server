@@ -65,4 +65,13 @@ public class PrepaidServiceImpl implements PrepaidService {
 
         return modelMapperUtility.initialize().map(prepaid, PrepaidDto.class);
     }
+
+    @Override
+    public PrepaidDetailsDto getMobilePhoneDataPrepaidById(UUID prepaidId) {
+        Prepaid prepaid = prepaidRepository.findById(prepaidId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Mobile phone credit prepaid with ID %s not found", prepaidId)));
+
+        return modelMapperUtility.initialize().map(prepaid, PrepaidDetailsDto.class);
+    }
 }
