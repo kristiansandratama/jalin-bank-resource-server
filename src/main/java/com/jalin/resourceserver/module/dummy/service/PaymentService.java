@@ -9,4 +9,5 @@ public interface PaymentService {
     TransactionDto payMobilePhoneCredit(String sourceAccountNumber, String corporateId, String mobilePhoneNumber, BigDecimal amount);
     TransactionDto payMobilePhoneData(String sourceAccountNumber, String corporateId, String mobilePhoneNumber, BigDecimal amount);
     TransactionDto payElectricityPrepaid(String sourceAccountNumber, String corporateId, String customerId, BigDecimal amount);
+    TransactionDto payElectricityPostpaid(String sourceAccountNumber, String corporateId, String customerId, BigDecimal amount);
 }

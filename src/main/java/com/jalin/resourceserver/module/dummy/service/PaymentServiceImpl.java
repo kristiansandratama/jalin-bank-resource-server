@@ -161,6 +161,38 @@ public class PaymentServiceImpl implements PaymentService {
         return modelMapperUtility.initialize().map(sourceTransaction, TransactionDto.class);
     }
 
+    @Override
+    public TransactionDto payElectricityPostpaid(String sourceAccountNumber, String corporateId, String customerId, BigDecimal amount) {
+        Account sourceAccount = accountRepository.findById(sourceAccountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Account with account number %s not found", sourceAccountNumber)));
+
+        Corporate corporate = corporateRepository.findById(corporateId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Corporate with corporate ID %s not found", corporateId)));
+
+        if (sourceAccount.getBalance().subtract(amount).compareTo(IDR_MIN_BALANCE) < 0) {
+            throw new TransactionNotAllowedException("Insufficient balance");
+        }
+
+        sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
+
+        Transaction sourceAccountNewTransaction = initializeTransaction(
+                CREDIT_TRANSACTION_TYPE,
+                sourceAccount.getCurrency(),
+                amount,
+                PAYMENT_BILL_TRANSACTION_NAME,
+                String.format(
+                        "%s/%s/%s",
+                        corporateId,
+                        customerId,
+                        "Pay electricity postpaid bill to" + " " + corporate.getCorporateName() + " " + customerId),
+                sourceAccount
+        );
+        Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
+        return modelMapperUtility.initialize().map(sourceTransaction, TransactionDto.class);
+    }
+
     private Transaction initializeTransaction(
             String transactionType,
             String currency,

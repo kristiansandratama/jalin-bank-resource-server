@@ -69,4 +69,16 @@ public class PaymentController {
                 new SuccessDetailsResponse(true, "Payment successful", transactionDto),
                 HttpStatus.CREATED);
     }
+
+    @PostMapping("/payment/electricity/postpaid")
+    public ResponseEntity<Object> payElectricityPostpaid(@Valid @RequestBody PaymentElectricityRequest requestBody) {
+        TransactionDto transactionDto = paymentService.payElectricityPostpaid(
+                requestBody.getSourceAccountNumber(),
+                requestBody.getCorporateId(),
+                requestBody.getCustomerId(),
+                requestBody.getAmount());
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Payment successful", transactionDto),
+                HttpStatus.CREATED);
+    }
 }

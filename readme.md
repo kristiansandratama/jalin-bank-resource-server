@@ -40,6 +40,8 @@
 > POST /api/v1/payment/mobile/prepaid/data
 - Pay electricity prepaid
 > POST /api/v1/payment/electricity/prepaid
+- Pay electricity postpaid
+> POST /api/v1/payment/electricity/postpaid
 
 **Provider**
 - Get all providers
