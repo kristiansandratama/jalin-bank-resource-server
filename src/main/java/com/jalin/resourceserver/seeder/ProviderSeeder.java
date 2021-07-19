@@ -42,6 +42,13 @@ public class ProviderSeeder implements CommandLineRunner {
             providerXl.setProductName("XL");
             providerXl.setProviderName("XL AXIATA");
             providerRepository.save(providerXl);
+
+            Provider providerIm3 = new Provider();
+            providerIm3.setProviderId("7003");
+            providerIm3.setPrefixNumber("0857");
+            providerIm3.setProductName("IM3 OOREDOO");
+            providerIm3.setProviderName("INDOSAT OOREDOO");
+            providerRepository.save(providerIm3);
         }
     }
 }

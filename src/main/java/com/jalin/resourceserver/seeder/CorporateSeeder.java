@@ -54,6 +54,12 @@ public class CorporateSeeder implements CommandLineRunner {
             corporateBni.setCorporateType(CorporateTypeEnum.BANK);
             corporateRepository.save(corporateBni);
 
+            Corporate corporateBca = new Corporate();
+            corporateBca.setCorporateId("014");
+            corporateBca.setCorporateName("Bank BCA");
+            corporateBca.setCorporateType(CorporateTypeEnum.BANK);
+            corporateRepository.save(corporateBca);
+
             Corporate corporateGopay = new Corporate();
             corporateGopay.setCorporateId("9101");
             corporateGopay.setCorporateName("Gopay");
@@ -84,6 +90,12 @@ public class CorporateSeeder implements CommandLineRunner {
             corporateLinkAja.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
             corporateRepository.save(corporateLinkAja);
 
+            Corporate corporateSakuku = new Corporate();
+            corporateSakuku.setCorporateId("9106");
+            corporateSakuku.setCorporateName("Sakuku");
+            corporateSakuku.setCorporateType(CorporateTypeEnum.DIGITAL_WALLET);
+            corporateRepository.save(corporateSakuku);
+
             Corporate corporateYoshinoya = new Corporate();
             corporateYoshinoya.setCorporateId("5001001001");
             corporateYoshinoya.setCorporateName("Yoshinoya Pondok Indah Mall 1");
@@ -96,6 +108,12 @@ public class CorporateSeeder implements CommandLineRunner {
             corporateSushiTei.setCorporateType(CorporateTypeEnum.MERCHANT);
             corporateRepository.save(corporateSushiTei);
 
+            Corporate corporateShihlin = new Corporate();
+            corporateShihlin.setCorporateId("5003002001");
+            corporateShihlin.setCorporateName("Shihlin Ambarukmo Plaza");
+            corporateShihlin.setCorporateType(CorporateTypeEnum.MERCHANT);
+            corporateRepository.save(corporateShihlin);
+
             Corporate corporateTelkomsel = new Corporate();
             corporateTelkomsel.setCorporateId("7001");
             corporateTelkomsel.setCorporateName("TELKOMSEL");
@@ -104,9 +122,15 @@ public class CorporateSeeder implements CommandLineRunner {
 
             Corporate corporateXlAxiata = new Corporate();
             corporateXlAxiata.setCorporateId("7002");
-            corporateXlAxiata.setCorporateName("XL Axiata");
+            corporateXlAxiata.setCorporateName("XL AXIATA");
             corporateXlAxiata.setCorporateType(CorporateTypeEnum.TELECOMS);
             corporateRepository.save(corporateXlAxiata);
+
+            Corporate corporateIndosat = new Corporate();
+            corporateIndosat.setCorporateId("7003");
+            corporateIndosat.setCorporateName("INDOSAT OOREDOO");
+            corporateIndosat.setCorporateType(CorporateTypeEnum.TELECOMS);
+            corporateRepository.save(corporateIndosat);
         }
     }
 }
