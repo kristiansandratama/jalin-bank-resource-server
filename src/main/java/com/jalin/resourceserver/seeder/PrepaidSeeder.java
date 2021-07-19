@@ -164,6 +164,36 @@ public class PrepaidSeeder implements CommandLineRunner {
             prepaid100Electricity.setPrice(new BigDecimal("102000"));
             prepaid100Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
             prepaidRepository.save(prepaid100Electricity);
+
+            Prepaid prepaid200Electricity = new Prepaid();
+            prepaid200Electricity.setPrepaidName("Token PLN 200.000");
+            prepaid200Electricity.setPrice(new BigDecimal("202000"));
+            prepaid200Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid200Electricity);
+
+            Prepaid prepaid500Electricity = new Prepaid();
+            prepaid500Electricity.setPrepaidName("Token PLN 500.000");
+            prepaid500Electricity.setPrice(new BigDecimal("502000"));
+            prepaid500Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid500Electricity);
+
+            Prepaid prepaid1000Electricity = new Prepaid();
+            prepaid1000Electricity.setPrepaidName("Token PLN 1.000.000");
+            prepaid1000Electricity.setPrice(new BigDecimal("1002000"));
+            prepaid1000Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid1000Electricity);
+
+            Prepaid prepaid5000Electricity = new Prepaid();
+            prepaid5000Electricity.setPrepaidName("Token PLN 5.000.000");
+            prepaid5000Electricity.setPrice(new BigDecimal("5002000"));
+            prepaid5000Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid5000Electricity);
+
+            Prepaid prepaid10000Electricity = new Prepaid();
+            prepaid10000Electricity.setPrepaidName("Token PLN 10.000.000");
+            prepaid10000Electricity.setPrice(new BigDecimal("10002000"));
+            prepaid10000Electricity.setPrepaidType(PrepaidTypeEnum.ELECTRICITY_CREDIT);
+            prepaidRepository.save(prepaid10000Electricity);
         }
     }
 }
