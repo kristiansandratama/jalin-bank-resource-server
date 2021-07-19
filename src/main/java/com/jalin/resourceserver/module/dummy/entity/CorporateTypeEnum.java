@@ -4,5 +4,6 @@ public enum CorporateTypeEnum {
     BANK,
     DIGITAL_WALLET,
     MERCHANT,
-    TELECOMS
+    TELECOMS,
+    UTILITY
 }

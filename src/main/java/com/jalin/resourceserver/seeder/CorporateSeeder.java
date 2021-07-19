@@ -131,6 +131,12 @@ public class CorporateSeeder implements CommandLineRunner {
             corporateIndosat.setCorporateName("INDOSAT OOREDOO");
             corporateIndosat.setCorporateType(CorporateTypeEnum.TELECOMS);
             corporateRepository.save(corporateIndosat);
+
+            Corporate corporatePln = new Corporate();
+            corporatePln.setCorporateId("10123");
+            corporatePln.setCorporateName("PLN");
+            corporatePln.setCorporateType(CorporateTypeEnum.UTILITY);
+            corporateRepository.save(corporatePln);
         }
     }
 }
