@@ -34,6 +34,10 @@
 **Payment**
 - Pay with QR
 > POST /api/v1/payment/qr
+- Pay mobile phone credit prepaid
+> POST /api/v1/payment/mobile/prepaid/credit 
+- Pay mobile phone data prepaid
+> POST /api/v1/payment/mobile/prepaid/data
 
 **Provider**
 - Get all providers
