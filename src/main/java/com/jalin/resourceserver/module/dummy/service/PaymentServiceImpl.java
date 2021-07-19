@@ -23,6 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
     private static final String PAYMENT_QR_TRANSACTION_NAME = "PAYMENT_QR";
     private static final String PAYMENT_MOBILE_PHONE_CREDIT_TRANSACTION_NAME = "PAYMENT_MOBILE_PHONE_CREDIT";
     private static final String PAYMENT_MOBILE_PHONE_DATA_TRANSACTION_NAME = "PAYMENT_MOBILE_PHONE_DATA";
+    private static final String PAYMENT_BILL_TRANSACTION_NAME = "PAYMENT_BILL";
     @Autowired
     private ModelMapperUtility modelMapperUtility;
     @Autowired
@@ -122,6 +123,38 @@ public class PaymentServiceImpl implements PaymentService {
                         corporateId,
                         mobilePhoneNumber,
                         "Pay mobile phone prepaid data to" + " " + corporate.getCorporateName() + " " + mobilePhoneNumber),
+                sourceAccount
+        );
+        Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);
+        return modelMapperUtility.initialize().map(sourceTransaction, TransactionDto.class);
+    }
+
+    @Override
+    public TransactionDto payElectricityPrepaid(String sourceAccountNumber, String corporateId, String customerId, BigDecimal amount) {
+        Account sourceAccount = accountRepository.findById(sourceAccountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Account with account number %s not found", sourceAccountNumber)));
+
+        Corporate corporate = corporateRepository.findById(corporateId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Corporate with corporate ID %s not found", corporateId)));
+
+        if (sourceAccount.getBalance().subtract(amount).compareTo(IDR_MIN_BALANCE) < 0) {
+            throw new TransactionNotAllowedException("Insufficient balance");
+        }
+
+        sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
+
+        Transaction sourceAccountNewTransaction = initializeTransaction(
+                CREDIT_TRANSACTION_TYPE,
+                sourceAccount.getCurrency(),
+                amount,
+                PAYMENT_BILL_TRANSACTION_NAME,
+                String.format(
+                        "%s/%s/%s",
+                        corporateId,
+                        customerId,
+                        "Pay electricity prepaid token to" + " " + corporate.getCorporateName() + " " + customerId),
                 sourceAccount
         );
         Transaction sourceTransaction = transactionRepository.save(sourceAccountNewTransaction);

@@ -38,6 +38,8 @@
 > POST /api/v1/payment/mobile/prepaid/credit 
 - Pay mobile phone data prepaid
 > POST /api/v1/payment/mobile/prepaid/data
+- Pay electricity prepaid
+> POST /api/v1/payment/electricity/prepaid
 
 **Provider**
 - Get all providers

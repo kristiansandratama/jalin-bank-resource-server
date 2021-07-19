@@ -2,6 +2,7 @@ package com.jalin.resourceserver.module.dummy.presenter.controller;
 
 import com.jalin.resourceserver.model.SuccessDetailsResponse;
 import com.jalin.resourceserver.module.account.model.TransactionDto;
+import com.jalin.resourceserver.module.dummy.presenter.model.PaymentElectricityRequest;
 import com.jalin.resourceserver.module.dummy.presenter.model.PaymentMobilePhoneCreditRequest;
 import com.jalin.resourceserver.module.dummy.presenter.model.PaymentMobilePhoneDataRequest;
 import com.jalin.resourceserver.module.dummy.presenter.model.PaymentQrRequest;
@@ -51,6 +52,18 @@ public class PaymentController {
                 requestBody.getSourceAccountNumber(),
                 requestBody.getCorporateId(),
                 requestBody.getMobilePhoneNumber(),
+                requestBody.getAmount());
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Payment successful", transactionDto),
+                HttpStatus.CREATED);
+    }
+
+    @PostMapping("/payment/electricity/prepaid")
+    public ResponseEntity<Object> payElectricityPrepaid(@Valid @RequestBody PaymentElectricityRequest requestBody) {
+        TransactionDto transactionDto = paymentService.payElectricityPrepaid(
+                requestBody.getSourceAccountNumber(),
+                requestBody.getCorporateId(),
+                requestBody.getCustomerId(),
                 requestBody.getAmount());
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Payment successful", transactionDto),
