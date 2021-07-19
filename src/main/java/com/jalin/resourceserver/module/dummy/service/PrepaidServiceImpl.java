@@ -3,6 +3,7 @@ package com.jalin.resourceserver.module.dummy.service;
 import com.jalin.resourceserver.exception.ResourceNotFoundException;
 import com.jalin.resourceserver.module.dummy.entity.Prepaid;
 import com.jalin.resourceserver.module.dummy.entity.PrepaidTypeEnum;
+import com.jalin.resourceserver.module.dummy.model.PrepaidDetailsDto;
 import com.jalin.resourceserver.module.dummy.model.PrepaidDto;
 import com.jalin.resourceserver.module.dummy.repository.PrepaidRepository;
 import com.jalin.resourceserver.utility.ModelMapperUtility;
@@ -30,6 +31,18 @@ public class PrepaidServiceImpl implements PrepaidService {
             prepaidDtoList.add(prepaidDto);
         }
         return prepaidDtoList;
+    }
+
+    @Override
+    public List<PrepaidDetailsDto> getMobilePhoneDataPrepaid() {
+        List<Prepaid> prepaidList = prepaidRepository.findByPrepaidTypeOrderByPriceAsc(PrepaidTypeEnum.MOBILE_PHONE_DATA);
+        List<PrepaidDetailsDto> prepaidDetailsDtoList = new ArrayList<>();
+        for (Prepaid prepaid : prepaidList) {
+            PrepaidDetailsDto prepaidDetailsDto = modelMapperUtility.initialize()
+                    .map(prepaid, PrepaidDetailsDto.class);
+            prepaidDetailsDtoList.add(prepaidDetailsDto);
+        }
+        return prepaidDetailsDtoList;
     }
 
     @Override

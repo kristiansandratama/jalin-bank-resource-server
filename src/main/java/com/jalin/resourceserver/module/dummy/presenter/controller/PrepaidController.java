@@ -1,6 +1,7 @@
 package com.jalin.resourceserver.module.dummy.presenter.controller;
 
 import com.jalin.resourceserver.model.SuccessDetailsResponse;
+import com.jalin.resourceserver.module.dummy.model.PrepaidDetailsDto;
 import com.jalin.resourceserver.module.dummy.model.PrepaidDto;
 import com.jalin.resourceserver.module.dummy.service.PrepaidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,14 @@ public class PrepaidController {
         List<PrepaidDto> prepaidDtoList = prepaidService.getMobilePhoneCreditPrepaid();
         return new ResponseEntity<>(
                 new SuccessDetailsResponse(true, "Mobile phone credit prepaid successfully found", prepaidDtoList),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/prepaid/mobile/data")
+    public ResponseEntity<Object> getMobilePhoneDataPrepaid() {
+        List<PrepaidDetailsDto> prepaidDetailsDtoList = prepaidService.getMobilePhoneDataPrepaid();
+        return new ResponseEntity<>(
+                new SuccessDetailsResponse(true, "Mobile phone data prepaid successfully found", prepaidDetailsDtoList),
                 HttpStatus.OK);
     }
 
