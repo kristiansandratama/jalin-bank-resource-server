@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("${url.map.api}/v1")
 public class CorporateController {
     @Autowired
     private CorporateService corporateService;

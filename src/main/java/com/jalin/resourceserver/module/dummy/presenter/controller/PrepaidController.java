@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("${url.map.api}/v1")
 public class PrepaidController {
     @Autowired
     private PrepaidService prepaidService;

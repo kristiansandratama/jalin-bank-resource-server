@@ -1,0 +1,19 @@
+name: Production Deployment
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      REPO: ${{secrets.DOCKER_REPO}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}
+      - name: Build Docker Image
+        run: mvn -Pproduction -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=jalin-resource-server
+      - name: Publish Docker Image
+        run: docker push $REPO
